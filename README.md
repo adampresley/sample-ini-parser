@@ -1,3 +1,2 @@
 # Sample INI Parser
-Sample project for a blog series on lexing and parsing
-
+Sample project for a blog series on lexing and parsing. This project demonstrates creating a lexer and basic parser using techniques presented by Rob Pike from [one of his presentations](http://cuddle.googlecode.com/hg/talk/lex.html#landing-slide). The basic premise revoles around a lexer that starts by executing functions that process tokens, each one returning a function that represents the next expected token state.

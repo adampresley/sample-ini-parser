@@ -11,6 +11,9 @@ import (
 /*
 Lexer object contains the state of our parser and provides
 a stream for accepting tokens.
+
+Based on work by Rob Pike
+http://cuddle.googlecode.com/hg/talk/lex.html#landing-slide
 */
 type Lexer struct {
 	Name   string
