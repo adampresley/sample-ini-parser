@@ -30,7 +30,6 @@ func Parse(fileName, input string) ini.IniFile {
 	log.Println("Starting lexer and parser for file", fileName, "...")
 
 	l := lexer.BeginLexing(fileName, input)
-	go l.Run()
 
 	for {
 		token = l.NextToken()
