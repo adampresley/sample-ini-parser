@@ -12,13 +12,11 @@ func main() {
 		key=abcdefg
 
 		[User]
-		name=Adam
 		userName=adampresley
 		keyFile=~/path/to/keyfile
 
 		[Servers]
 		server1=localhost:8080
-		server2=localhost:8081
 	`
 
 	parsedINIFile := parser.Parse("sample.ini", sampleInput)
