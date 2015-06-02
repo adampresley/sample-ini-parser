@@ -23,7 +23,6 @@ func Parse(fileName, input string) ini.IniFile {
 	var tokenValue string
 
 	/* State variables */
-	hasSection := false
 	section := ini.IniSection{}
 	key := ""
 
@@ -41,11 +40,7 @@ func Parse(fileName, input string) ini.IniFile {
 		}
 
 		if isEOF(token) {
-			if hasSection == true {
-				log.Println("Adding section '", section.Name, "' to output...")
-				output.Sections = append(output.Sections, section)
-			}
-
+			output.Sections = append(output.Sections, section)
 			break
 		}
 
@@ -54,26 +49,19 @@ func Parse(fileName, input string) ini.IniFile {
 			/*
 			 * Reset tracking variables
 			 */
-			if hasSection == true {
-				log.Println("Adding section '", section.Name, "' to output...")
+			if len(section.KeyValuePairs) > 0 {
 				output.Sections = append(output.Sections, section)
 			}
 
 			key = ""
-			hasSection = true
 
 			section.Name = tokenValue
 			section.KeyValuePairs = make([]ini.IniKeyValue, 0)
 
-			log.Println("Section", section.Name, "started...")
-
 		case lexertoken.TOKEN_KEY:
 			key = tokenValue
-			log.Println("Key:", key)
 
 		case lexertoken.TOKEN_VALUE:
-			log.Println("Value:", tokenValue)
-
 			section.KeyValuePairs = append(section.KeyValuePairs, ini.IniKeyValue{Key: key, Value: tokenValue})
 			key = ""
 		}

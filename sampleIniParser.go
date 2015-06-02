@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"log"
 
 	"github.com/adampresley/sample-ini-parser/services/parser"
@@ -8,15 +9,25 @@ import (
 
 func main() {
 	sampleInput := `
-		[section]
-		key1=value1
-		key2=value2
-		[bob]
-		key3=value3
-		key4=This is a big test of a longer, more awesome line
+		key=abcdefg
 
+		[User]
+		name=Adam
+		userName=adampresley
+		keyFile=~/path/to/keyfile
+
+		[Servers]
+		server1=localhost:8080
+		server2=localhost:8081
 	`
 
-	output := parser.Parse("sample.ini", sampleInput)
-	log.Println(output)
+	parsedINIFile := parser.Parse("sample.ini", sampleInput)
+	prettyJSON, err := json.MarshalIndent(parsedINIFile, "", "   ")
+
+	if err != nil {
+		log.Println("Error marshalling JSON:", err.Error())
+		return
+	}
+
+	log.Println(string(prettyJSON))
 }

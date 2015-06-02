@@ -1,6 +1,6 @@
 package ini
 
 type IniFile struct {
-	FileName string
-	Sections []IniSection
+	FileName string       `json:"fileName"`
+	Sections []IniSection `json:"sections"`
 }
